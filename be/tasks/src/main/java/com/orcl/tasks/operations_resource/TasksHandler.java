@@ -15,7 +15,7 @@ public class TasksHandler {
 
     private TasksCommandService tasksCommandService;
     private TasksQueryService tasksQueryService;
-    public ResponseEntity<String> saveTask(Task task) {
+    public ResponseEntity<Task> saveTask(Task task) {
         return tasksCommandService.saveTask(task);
     }
 
@@ -23,11 +23,11 @@ public class TasksHandler {
         return tasksQueryService.getTasks();
     }
 
-    public ResponseEntity<String> deleteTask(String name) {
+    public ResponseEntity<List<Task>> deleteTask(String name) {
         return tasksCommandService.deleteTask(name);
     }
 
-    public ResponseEntity<String> administerTask(Task task) {
+    public ResponseEntity<Task> administerTask(Task task) {
         return tasksCommandService.updateTask(task);
     }
 }

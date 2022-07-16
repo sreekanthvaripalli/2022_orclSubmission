@@ -24,9 +24,10 @@ public class TasksQueryAdapter implements TasksQueryRepository {
     public ResponseEntity<List<Task>> getTasks() {
         try {
             Optional<List<Task>> tasksOptional = getAllTasksFromDB();
-            return tasksOptional.map(users -> new ResponseEntity<>(users, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+            return tasksOptional.map(tasks -> new ResponseEntity<>(tasks, HttpStatus.OK))
+                    .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
         } catch (Exception e) {
-            log.error("Exception occurred while fetching all users", e);
+            log.error("Exception occurred while fetching all tasks", e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
@@ -38,7 +39,7 @@ public class TasksQueryAdapter implements TasksQueryRepository {
             log.error("returned empty result from DB");
             return Optional.empty();
         } else {
-            log.info("number of users fetched : {}", allTasks.size());
+            log.info("number of tasks fetched : {}", allTasks.size());
             return Optional.of(getMappedTasks(allTasks));
         }
     }

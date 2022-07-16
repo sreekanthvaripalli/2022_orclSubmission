@@ -21,7 +21,7 @@ public class TasksController {
     private TasksHandler tasksHandler;
 
     @PostMapping(value = "/saveTask")
-    public ResponseEntity<String> saveTask(
+    public ResponseEntity<Task> saveTask(
             @RequestBody Task tasksRequest
     ){
         return tasksHandler.saveTask(tasksRequest);
@@ -34,13 +34,13 @@ public class TasksController {
     }
 
     @DeleteMapping(value = "/deleteTask")
-    public ResponseEntity<String> deleteTask(
+    public ResponseEntity<List<Task>> deleteTask(
             @RequestParam String name
     ) {
         return tasksHandler.deleteTask(name);
     }
     @PutMapping(value = "/administerTask")
-    public ResponseEntity<String> administerUser(
+    public ResponseEntity<Task> administerTask(
             @RequestBody Task taskRequest
     ) {
         return tasksHandler.administerTask(taskRequest);
